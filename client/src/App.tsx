@@ -16,7 +16,7 @@ function App() {
   const { token, setToken } = useAppContext();
 
   useEffect(() => {
-    fetch("http://localhost:4242/hello")
+    fetch(`${process.env.REACT_APP_API_URL}hello`)
       .then(() => setConnected(true))
       .catch(() => setConnected(false));
   }, []);
