@@ -1,0 +1,11 @@
+.addTrainingForm {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addTrainingForm input, .addTrainingForm button {
+    margin: 0;
+}

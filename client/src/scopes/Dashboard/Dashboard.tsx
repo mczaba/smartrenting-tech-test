@@ -1,15 +1,13 @@
-import React from "react";
-import {  useAppContext } from "../../contexts/AppContext";
+import React, { useState } from "react";
+import { useAppContext } from "../../contexts/AppContext";
+import CreateTraining from "../CreateTraining/CreateTraining";
 
 import "./Dashboard.css";
 
 export default function Dashboard() {
   const { token, setToken } = useAppContext();
+  const [showCreateTraining, setShowCreateTraining] = useState(false);
 
-  const logToken = () => {
-    console.log(token)
-  }
-  
   return (
     <div className="Dashboard">
       <div className="table">
@@ -18,8 +16,11 @@ export default function Dashboard() {
             Nombre d&apos;heures
             <input type="number" id="hours"></input>
           </label>
-          <button onClick={logToken}>Ajouter un nombre d&apos;heure d&apos;entrainement</button>
+          <button onClick={() => setShowCreateTraining(!showCreateTraining)}>
+            Ajouter un nombre d&apos;heure d&apos;entrainement
+          </button>
         </div>
+        {showCreateTraining && <CreateTraining />}
         <table>
           <thead>
             <tr>
