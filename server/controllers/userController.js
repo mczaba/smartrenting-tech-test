@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import dbQuery from "../util/db";
+import db from "../util/db";
 
 const populateUsers = async (req, res) => {
   const users = [
@@ -10,8 +10,8 @@ const populateUsers = async (req, res) => {
   users.forEach(async (user) => {
     try {
       const hash = await bcrypt.hash(user.password, 10);
-      const insertResult = await dbQuery(
-        `INSERT INTO user (username, password) VALUES("${user.username}","${hash}")`
+      const insertResult = await db.query(
+        `INSERT INTO user (username, password) VALUES(${db.escapeString(user.username)},"${hash}")`
       );
       console.log(insertResult);
       if (!insertResult) throw new Error(`could not insert ${user.username}`);
@@ -24,7 +24,7 @@ const populateUsers = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
     try {
-        const usersResult = await dbQuery(`SELECT id, username FROM user`)
+        const usersResult = await db.query(`SELECT id, username FROM user`)
         res.json({status: 'success', userList: usersResult})
     } catch(err) {
         res.json({status: 'error', message: err.message})

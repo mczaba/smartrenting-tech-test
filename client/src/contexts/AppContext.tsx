@@ -9,25 +9,31 @@ type Actions<T> = {
 
 interface IAppState {
   token: string | null;
+  userId: number | null;
 }
 
 interface IAppContext {
   setToken: (string) => void;
+  setUserId: (number) => void;
 }
 
 const initialState: IAppState = {
   token: null,
+  userId: null
 };
 
 const AppContext = createContext<IAppState & IAppContext>({
   ...initialState,
   setToken: () => {},
+  setUserId: () => {}
 });
 
 export const AppReducer = (state: IAppState, action: Actions<ActionTypes>) => {
   switch (action.type) {
     case ActionTypes.SET_TOKEN:
       return { ...state, token: action?.payload };
+    case ActionTypes.SET_USERID:
+      return { ...state, userId: action?.payload };
     default:
       return state;
   }
@@ -44,6 +50,10 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
           setImmediate(() =>
             dispatch({ type: ActionTypes.SET_TOKEN, payload: token })
           ),
+        setUserId: (userId) =>
+          setImmediate(() =>
+            dispatch({ type: ActionTypes.SET_USERID, payload: userId })
+          )
       }}
     >
       {children}

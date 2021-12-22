@@ -20,4 +20,4 @@ const dbQuery = (query) =>
       }
     });
   });
-export default dbQuery;
+export default { query: dbQuery, escapeString: mysql.escape };

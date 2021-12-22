@@ -10,29 +10,33 @@ type User = {
 };
 
 type GetUserResponseBody = {
-  status: "success" | "error",
-  userList?: User[],
-  message?: string,
+  status: "success" | "error";
+  userList?: User[];
+  message?: string;
 };
 
 type PostTrainingResponseBody = {
-    status: 'success' | "error",
-    message: string,
-}
+  status: "success" | "error";
+  message: string;
+};
 
 type nullableString = string | null;
 
-const today = dayjs().format("YYYY-MM-DD")
+const today = dayjs().format("YYYY-MM-DD");
 
-export default function Dashboard() {
+type Props = {
+  fetchTrainings: () => void;
+};
+
+export default function CreateTraining({ fetchTrainings }: Props) {
   const { token, setToken } = useAppContext();
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState<User[]>([]);
   const [fetchError, setFetchError] = useState("");
   const [userId, setUserId] = useState<nullableString>(null);
   const [numberOfHours, setNumberOfHours] = useState("1");
   const [date, setDate] = useState(today);
   const [validationError, setValidationError] = useState("");
-  const [success, setSuccess] = useState('')
+  const [success, setSuccess] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -53,7 +57,7 @@ export default function Dashboard() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setValidationError("");
-    setSuccess('')
+    setSuccess("");
     if (!userId) return setValidationError("Vous devez choisir un utilisateur");
     const body = { userId, numberOfHours, date };
     const response = await fetch(
@@ -68,12 +72,14 @@ export default function Dashboard() {
         body: JSON.stringify(body)
       }
     );
-    const responseBody: PostTrainingResponseBody = await response.json()
-    if (responseBody.status === "error") return setValidationError(responseBody.message)
-    setSuccess("Les heures d'entrainement ont bien été rajoutées")
-    setUserId(null)
-    setNumberOfHours('1')
-    setDate(today)
+    const responseBody: PostTrainingResponseBody = await response.json();
+    if (responseBody.status === "error")
+      return setValidationError(responseBody.message);
+    setSuccess("Les heures d'entrainement ont bien été rajoutées");
+    setUserId(null);
+    setNumberOfHours("1");
+    setDate(today);
+    fetchTrainings();
   };
 
   return (

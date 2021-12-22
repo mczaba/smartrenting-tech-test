@@ -8,6 +8,7 @@ type responseBody = {
   status: "error" | "ok";
   message?: string;
   token?: string;
+  userId?: number;
 };
 
 export default function Login() {
@@ -33,7 +34,6 @@ export default function Login() {
       },
       body: JSON.stringify(body)
     };
-    console.log(options);
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}auth/login`,
       options
@@ -41,9 +41,11 @@ export default function Login() {
     const responseBody: responseBody = await response.json();
     if (responseBody.status === "error")
       return handleError(responseBody.message);
+    console.log(responseBody)
     localStorage.setItem(
       "token",
       JSON.stringify({
+        userId: responseBody.userId,
         token: responseBody.token,
         expireDate: dayjs().add(1, "hour")
       })
