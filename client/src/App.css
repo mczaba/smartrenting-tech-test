@@ -1,10 +1,25 @@
+input[type="text"], input[type="password"], select, input[type="date"] {
+  background-color: white;
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+}
+
+button {
+  background-color: green;
+  color: white;
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+}
+
 .App {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-color: #282c34;
+  background-color: white;
   text-align: center;
 }
 
@@ -21,7 +36,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #333;
 }
 
 .App-link {
@@ -29,7 +44,7 @@
 }
 
 .login {
-  color: white;
+  color: #333;
   font-size: xx-large;
 }
 

@@ -47,7 +47,7 @@ export default function StatsDateSum({ updateStats }: Props) {
           value={date}
           onChange={(event) => setDate(event.target.value)}
         />
-        <p>{sum}</p>
+        <p>Somme des heures : {sum}</p>
       </div>
     </div>
   );

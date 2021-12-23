@@ -23,3 +23,19 @@ code {
 .success {
   color: green
 }
+
+input[type="text"], input[type="password"], select, input[type="date"] {
+  background-color: white;
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+  min-width: 100px;
+}
+
+button {
+  background-color: green;
+  color: white;
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+}

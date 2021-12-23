@@ -56,10 +56,6 @@ export default function Dashboard() {
     <div className="Dashboard">
       <div className="table">
         <div className="control">
-          <label htmlFor="hours">
-            Nombre d&apos;heures
-            <input type="number" id="hours"></input>
-          </label>
           <button onClick={() => setShowCreateTraining(!showCreateTraining)}>
             Ajouter un nombre d&apos;heure d&apos;entrainement
           </button>
@@ -92,6 +88,7 @@ export default function Dashboard() {
         )}
       </div>
       <div className="stats">
+        <h1>Statistiques</h1>
         <StatsAverage updateStats={updateStats} />
         <StatsDateSum updateStats={updateStats} />
         <StatsTopTrainers updateStats={updateStats} />

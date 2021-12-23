@@ -9,3 +9,8 @@
 .addTrainingForm input, .addTrainingForm button {
     margin: 0;
 }
+
+.input-div {
+    display: flex;
+    flex-direction: column;
+}

@@ -32,7 +32,6 @@ const getTopTrainers = async (req, res, next) => {
     const topTrainersResult = await db.query(
       "SELECT IFNULL(SUM(hours), 0) hours, username FROM training INNER JOIN user ON training.userId = user.id GROUP BY userId ORDER BY hours DESC LIMIT 5"
     );
-    console.log(topTrainersResult)
     res
       .status(200)
       .json({ status: "success", trainerList: topTrainersResult });

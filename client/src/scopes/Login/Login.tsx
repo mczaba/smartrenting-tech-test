@@ -41,7 +41,7 @@ export default function Login() {
     const responseBody: responseBody = await response.json();
     if (responseBody.status === "error")
       return handleError(responseBody.message);
-    console.log(responseBody)
+    console.log(responseBody);
     localStorage.setItem(
       "token",
       JSON.stringify({
@@ -55,9 +55,10 @@ export default function Login() {
 
   return (
     <div className="Login">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-form">
         <label htmlFor="username">Username</label>
         <input
+          autoComplete="off"
           id="username"
           type="text"
           value={username}
@@ -65,6 +66,7 @@ export default function Login() {
         ></input>
         <label htmlFor="password">Password</label>
         <input
+          autoComplete="off"
           id="password"
           type="password"
           value={password}

@@ -12,12 +12,13 @@ type Trainer = {
   hours: number;
 };
 
-
 type Props = { updateStats: boolean };
 
 export default function StatsTopTrainers({ updateStats }: Props) {
   const { token, setToken, userId, setUserId } = useAppContext();
   const [trainerList, setTrainerList] = useState<Trainer[]>([]);
+
+  const colors = ["blue", "red", "yellow", " green", "purple"];
 
   const fetchTrainers = async () => {
     const response = await fetch(
@@ -41,13 +42,9 @@ export default function StatsTopTrainers({ updateStats }: Props) {
   return (
     <div>
       <h4>Top 5 utilisateurs</h4>
-      <ul>
-        {trainerList.map((trainer) => (
-          <li key={`top${trainer.username}`}>
-            {trainer.username} : {trainer.hours} heures
-          </li>
-        ))}
-      </ul>
+      <ol>
+        {trainerList.map(trainer => <li key={`top${trainer.username}`}>{trainer.username} : {trainer.hours} heures</li>)}
+      </ol>
     </div>
   );
 }

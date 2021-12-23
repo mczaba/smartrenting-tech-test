@@ -90,33 +90,44 @@ export default function CreateTraining({ fetchTrainings }: Props) {
         <div>
           <h2>Ajouter des heures d&apos;entrainement</h2>
           <form className="addTrainingForm" onSubmit={handleSubmit}>
-            <select
-              name=""
-              id=""
-              onChange={(event) => setUserId(event.target.value)}
-            >
-              <option value="null"></option>
-              {userList.map((user) => (
-                <option key={user.id} value={user.id}>
-                  {user.username}
-                </option>
-              ))}
-            </select>
-            <select
-              value={numberOfHours}
-              onChange={(event) => setNumberOfHours(event.target.value)}
-            >
-              {Array.from(Array(10).keys()).map((number) => (
-                <option key={`hour${number + 1}`} value={number + 1}>
-                  {number + 1}
-                </option>
-              ))}
-            </select>
-            <input
-              type="date"
-              value={date}
-              onChange={(event) => setDate(event.target.value)}
-            ></input>
+            <div className="input-div">
+            <label htmlFor="user">Utilisateur</label>
+              <select
+                name="user"
+                id=""
+                onChange={(event) => setUserId(event.target.value)}
+              >
+                <option value="null"></option>
+                {userList.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.username}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="input-div">
+              <label htmlFor="hours">Nombre d&apos;heures</label>
+              <select
+                name="hours"
+                value={numberOfHours}
+                onChange={(event) => setNumberOfHours(event.target.value)}
+              >
+                {Array.from(Array(10).keys()).map((number) => (
+                  <option key={`hour${number + 1}`} value={number + 1}>
+                    {number + 1}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="input-div">
+              <label htmlFor="date">Date</label>
+              <input
+                type="date"
+                name="date"
+                value={date}
+                onChange={(event) => setDate(event.target.value)}
+              ></input>
+            </div>
             <button>Ajouter les heures</button>
           </form>
           {validationError && <p className="error">{validationError}</p>}
