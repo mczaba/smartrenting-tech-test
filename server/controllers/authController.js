@@ -27,11 +27,10 @@ const generateToken = (id, username, res) => {
     }
   );
   const responseBody = { status: "success", token, userId: id }
-  console.log(responseBody)
   return res.status(200).json(responseBody);
 }
 
-const logIn = async (req, res) => {
+const logIn = async (req, res, next) => {
   const { username, password } = req.body;
   try {
     const userResult = await db.query(
@@ -53,9 +52,7 @@ const logIn = async (req, res) => {
         .send({ status: "error", message: "Mauvais password" });
     return generateToken(userResult[0].id, username, res)
   } catch (err) {
-    return res
-      .status(500)
-      .send({ status: "error", message: "Erreur du serveur" });
+    return next("Erreur du serveur")
   }
 };
 

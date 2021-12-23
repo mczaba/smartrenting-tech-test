@@ -13,7 +13,6 @@ const populateUsers = async (req, res) => {
       const insertResult = await db.query(
         `INSERT INTO user (username, password) VALUES(${db.escapeString(user.username)},"${hash}")`
       );
-      console.log(insertResult);
       if (!insertResult) throw new Error(`could not insert ${user.username}`);
     } catch (err) {
       console.error(err.message);
@@ -22,12 +21,12 @@ const populateUsers = async (req, res) => {
   res.send("done");
 };
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res, next) => {
     try {
         const usersResult = await db.query(`SELECT id, username FROM user`)
         res.json({status: 'success', userList: usersResult})
     } catch(err) {
-        res.json({status: 'error', message: err.message})
+        next(err.message)
     }
 }
 

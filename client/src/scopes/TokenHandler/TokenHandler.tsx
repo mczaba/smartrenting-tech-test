@@ -15,7 +15,6 @@ export default function TokenHandler() {
   const matchedToken = JSON.parse(localStorage.getItem('token'))
   if (!matchedToken) return null
   if (dayjs().isBefore(dayjs(matchedToken.expireDate))) {
-    console.log(matchedToken)
     setToken(matchedToken.token)
     setUserId(matchedToken.userId)
   }

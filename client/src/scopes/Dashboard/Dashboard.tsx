@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 
 import CreateTraining from "../../components/CreateTraining/CreateTraining";
-import TrainingRow from '../../components/TrainingRow/TrainingRow'
+import TrainingRow from "../../components/TrainingRow/TrainingRow";
+import StatsAverage from "../../components/StatsAverage/StatsAverage";
+import StatsDateSum from '../../components/StatsDateSum/StatsDateSum';
+import StatsTopTrainers from '../../components/StatsTopTrainers/StatsTopTrainers'
 import "./Dashboard.css";
 
 type Training = {
@@ -24,6 +27,7 @@ export default function Dashboard() {
   const [showCreateTraining, setShowCreateTraining] = useState(false);
   const [trainingList, setTrainingList] = useState<Training[]>([]);
   const [fetchError, setFetchError] = useState("");
+  const [updateStats, setUpdateStats] = useState(false);
 
   const fetchTrainings = async () => {
     const response = await fetch(
@@ -37,11 +41,14 @@ export default function Dashboard() {
     );
     const responseBody: getTrainingsResponseBody = await response.json();
     if (responseBody.status === "error")
-      return setFetchError("Erreur lors de la récupération des données serveur");
+      return setFetchError(
+        "Erreur lors de la récupération des données serveur"
+      );
     setTrainingList(responseBody.trainingList);
+    setUpdateStats(!updateStats);
   };
 
-  useEffect(() => {  
+  useEffect(() => {
     fetchTrainings();
   }, [token]);
 
@@ -57,7 +64,9 @@ export default function Dashboard() {
             Ajouter un nombre d&apos;heure d&apos;entrainement
           </button>
         </div>
-        {showCreateTraining && <CreateTraining fetchTrainings={fetchTrainings}/>}
+        {showCreateTraining && (
+          <CreateTraining fetchTrainings={fetchTrainings} />
+        )}
         {fetchError ? (
           <h2 className="error">{fetchError}</h2>
         ) : (
@@ -71,14 +80,22 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody>
-              {trainingList.map((training) => 
-                <TrainingRow key={training.id} training={training} fetchTrainings={fetchTrainings}/>
-              )}
+              {trainingList.map((training) => (
+                <TrainingRow
+                  key={training.id}
+                  training={training}
+                  fetchTrainings={fetchTrainings}
+                />
+              ))}
             </tbody>
           </table>
         )}
       </div>
-      <div className="stats"></div>
+      <div className="stats">
+        <StatsAverage updateStats={updateStats} />
+        <StatsDateSum updateStats={updateStats} />
+        <StatsTopTrainers updateStats={updateStats} />
+      </div>
     </div>
   );
 }

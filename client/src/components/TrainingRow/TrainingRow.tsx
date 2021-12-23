@@ -22,11 +22,10 @@ type ResponseBody = {
 
 export default function TrainingRow({ training, fetchTrainings }: Props) {
   const { token, setToken, userId, setUserId } = useAppContext();
-  console.log({ trainingUserId: training.userId, userId });
 
   const deleteTraining = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}training/${training.userId}/${training.id}`,
+      `${process.env.REACT_APP_API_URL}training/${training.id}`,
       {
         method: "DELETE",
         headers: {
@@ -41,7 +40,7 @@ export default function TrainingRow({ training, fetchTrainings }: Props) {
 
   const setNumberOfHours = async (numberOfHours: number) => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}training/${training.userId}/${training.id}`,
+      `${process.env.REACT_APP_API_URL}training/${training.id}`,
       {
         method: "PUT",
         headers: {

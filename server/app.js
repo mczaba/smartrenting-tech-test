@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import authRouter from './routes/auth'
 import userRouter from './routes/users'
 import trainingRouter from './routes/training'
+import statsRouter from './routes/stats'
 
 const port = 4242;
 const app = express();
@@ -24,6 +25,12 @@ app.get('/hello', (req, res) => {
 app.use('/auth', authRouter)
 app.use('/user', userRouter)
 app.use('/training', trainingRouter)
+app.use('/stats', statsRouter)
+
+
+app.use((err, req, res) => {
+  res.status(500).json({status: 'error', message: err})
+})
 
 app.listen(port, () => {
   console.log(`Running on port ${port}`);
