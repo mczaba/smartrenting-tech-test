@@ -7,7 +7,7 @@ const addTraining = async (req, res, next) => {
       date
     )} AND userId = ${db.escapeString(userId)}`
   );
-  if (selectResult)
+  if (selectResult.length > 0)
     return res
       .status(401)
       .json({

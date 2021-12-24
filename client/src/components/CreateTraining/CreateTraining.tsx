@@ -76,9 +76,6 @@ export default function CreateTraining({ fetchTrainings }: Props) {
     if (responseBody.status === "error")
       return setValidationError(responseBody.message);
     setSuccess("Les heures d'entrainement ont bien été rajoutées");
-    setUserId(null);
-    setNumberOfHours("1");
-    setDate(today);
     fetchTrainings();
   };
 
@@ -95,6 +92,7 @@ export default function CreateTraining({ fetchTrainings }: Props) {
               <select
                 name="user"
                 id=""
+                value={userId}
                 onChange={(event) => setUserId(event.target.value)}
               >
                 <option value="null"></option>
