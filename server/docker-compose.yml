@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    depends_on:
+      - mariadb
+    ports:
+      - "4242:4242"
+    volumes:
+      - ./:/usr/src/app/
+      - /usr/src/app/node_modules
+
+  mariadb:
+    image: mariadb:10.5
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_DATABASE=smartialart
+    command: --init-file /data/application/init.sql
+    volumes:
+        - ./init.sql:/data/application/init.sql

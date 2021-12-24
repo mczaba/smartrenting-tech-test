@@ -3,7 +3,7 @@ import mysql from "mysql";
 require("dotenv").config();
 
 const dbConnect = mysql.createConnection({
-  host: process.env.DB_HOST,
+  host: 'mariadb',
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,

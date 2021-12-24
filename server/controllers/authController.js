@@ -52,6 +52,7 @@ const logIn = async (req, res, next) => {
         .send({ status: "error", message: "Mauvais password" });
     return generateToken(userResult[0].id, username, res)
   } catch (err) {
+    console.log(err.message)
     return next("Erreur du serveur")
   }
 };
