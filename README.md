@@ -14,3 +14,8 @@ Ajout des composants :
   - TrainingRow : ligne dans la table des entrainements comprenant les données et les boutons de modification / suppression
   - StatsAverage / StatsDateSum / StatsTopTrainers : composants allant chercher les données de statistiques coté back pour les afficher dans la partie stats du dashboard
 
+# TODO
+- rediriger l'utilisateur vers /dashboard s'il arrive sur / en étant déjà connecté
+- meilleure organisation pour les types : faire un fichier utilitaire avec les types à utiliser dans plusieurs composants en export
+- faire un custom hook qui gère la récupération de données à l'API (code redondant dans les composants : fetch avec les headers d'authorization, response = response.json() etc ..)
+- Implémenter la validation coté serveur

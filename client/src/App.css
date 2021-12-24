@@ -9,19 +9,26 @@
 }
 
 .App-logo {
-  height: 100px;
+  height: 100%;
   max-width: 50%;
   pointer-events: none;
 }
 
-.App-header {
-  min-height: 20vh;
+.App-header-name-div {
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
+}
+
+.App-header {
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: #333;
+  padding: 0.5vh 2vw;
 }
 
 .App-link {

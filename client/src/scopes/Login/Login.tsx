@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+import { useAppContext } from "../../contexts/AppContext";
 import dayjs from "dayjs";
 
 import "./Login.css";
@@ -13,6 +14,7 @@ type responseBody = {
 
 export default function Login() {
   const history = useHistory();
+  const { token, setToken } = useAppContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -55,26 +57,30 @@ export default function Login() {
 
   return (
     <div className="Login">
-      <form onSubmit={handleSubmit} className="login-form">
-        <label htmlFor="username">Username</label>
-        <input
-          autoComplete="off"
-          id="username"
-          type="text"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        ></input>
-        <label htmlFor="password">Password</label>
-        <input
-          autoComplete="off"
-          id="password"
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        ></input>
-        {error && <p>{error}</p>}
-        <button type="submit">Login</button>
-      </form>
+      {token ? (
+        <h1>Vous êtes déjà connectés</h1>
+      ) : (
+        <form onSubmit={handleSubmit} className="login-form">
+          <label htmlFor="username">Username</label>
+          <input
+            autoComplete="off"
+            id="username"
+            type="text"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+          ></input>
+          <label htmlFor="password">Password</label>
+          <input
+            autoComplete="off"
+            id="password"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          ></input>
+          {error && <p>{error}</p>}
+          <button type="submit">Login</button>
+        </form>
+      )}
     </div>
   );
 }

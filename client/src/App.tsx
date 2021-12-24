@@ -15,6 +15,11 @@ function App() {
   const [connected, setConnected] = useState<nullableBoolean>(null);
   const { token, setToken } = useAppContext();
 
+  const logOut = () => {
+    setToken(null);
+    localStorage.removeItem("token");
+  };
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}hello`)
       .then(() => setConnected(true))
@@ -24,12 +29,15 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h5>{`SmartialArt`}</h5>
-        <img
-          src="https://www.pngall.com/wp-content/uploads/3/Karate-Silhouette-Transparent.png"
-          className="App-logo"
-          alt="logo"
-        />
+        <div className="App-header-name-div">
+          <img
+            src="https://www.pngall.com/wp-content/uploads/3/Karate-Silhouette-Transparent.png"
+            className="App-logo"
+            alt="logo"
+          />
+          <h5>{`SmartialArt`}</h5>
+        </div>
+        {token && <button onClick={logOut}>Log out</button>}
       </header>
       <Router>
         <Switch>
